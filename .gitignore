@@ -1,0 +1,15 @@
+node_modules
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
+.DS_Store
+.idea 
+assets/.DS_Store
+assets/img/.DS_Store
+components/.DS_Store
+public/.DS_Store
+public/img/.DS_Store

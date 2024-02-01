@@ -1,0 +1,18 @@
+RewriteEngine On
+
+# Sicherstellen, dass mod_rewrite aktiv ist
+<IfModule mod_rewrite.c>
+    # Anfragen für www.dot.crowdloan.integritee.network und dot.crowdloan.integritee.network auf https umleiten
+    RewriteCond %{HTTP_HOST} ^www\.dot\.crowdloan\.integritee\.network [NC,OR]
+    RewriteCond %{HTTP_HOST} ^dot\.crowdloan\.integritee\.network [NC]
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://dot.crowdloan.integritee.network%{REQUEST_URI} [L,R=301]
+
+    # Anfragen für http://dot.crowdloan.integritee.network und http://www.dot.crowdloan.integritee.network auf https umleiten
+    # Diese Regel wird durch die obige Regel bereits abgedeckt, da HTTPS-Status geprüft wird und zu https umleitet,
+    # unabhängig davon, ob www vorhanden ist oder nicht.
+    
+    # Optional: www in der URL entfernen, falls jemand direkt https://www.dot... eingibt
+    RewriteCond %{HTTP_HOST} ^www\.(dot\.crowdloan\.integritee\.network) [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
